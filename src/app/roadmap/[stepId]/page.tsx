@@ -1,6 +1,24 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { AppHeaderServer } from "@/components/AppHeaderServer";
 import { dashboardMock } from "@/lib/mock/dashboard";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { stepId: string };
+}): Promise<Metadata> {
+  const stepNumber = Number(params.stepId);
+  const step = dashboardMock.roadmap.find((s) => s.step === stepNumber);
+  const title = step ? `Roadmap — Step ${step.step} — Wealthup` : "Roadmap — Wealthup";
+
+  return {
+    title,
+    description: step
+      ? `${step.title} — roadmap step details.`
+      : "Roadmap step details.",
+  };
+}
 
 export default async function RoadmapStepPage({
   params,
@@ -41,7 +59,7 @@ export default async function RoadmapStepPage({
                   }`}
                 >
                   {step.cta}
-                  <span className="ml-2 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700">
+                  <span className="ml-2 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
                     +{step.ctaPoints} pts
                   </span>
                 </button>

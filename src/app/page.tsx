@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { ShieldCheckIcon } from "@/components/Icons";
 import { AppHeaderServer } from "@/components/AppHeaderServer";
@@ -6,6 +7,11 @@ import { ScoreBreakdownItem } from "@/components/dashboard/ScoreBreakdownItem";
 import { DashboardGreeting } from "@/components/dashboard/DashboardGreeting";
 import { WealthupScoreGaugeCard } from "@/components/dashboard/WealthupScoreGaugeCard";
 import { dashboardMock } from "@/lib/mock/dashboard";
+
+export const metadata: Metadata = {
+  title: "Dashboard — Wealthup",
+  description: "Wealthup dashboard overview with score breakdown and roadmap.",
+};
 
 export default async function DashboardPage() {
   const data = dashboardMock;
@@ -90,7 +96,7 @@ export default async function DashboardPage() {
                   </div>
 
                   <div className="mt-6">
-                    <div className="text-xs font-medium text-slate-600">
+                    <div className="text-xs font-medium text-slate-600 dark:text-slate-300">
                       Your score breakdown
                     </div>
                     <div className="mt-3 grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2">
